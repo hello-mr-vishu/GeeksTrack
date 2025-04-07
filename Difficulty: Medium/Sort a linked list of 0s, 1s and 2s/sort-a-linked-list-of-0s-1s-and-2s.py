@@ -19,39 +19,47 @@ class Solution:
     #Function to sort a linked list of 0s, 1s and 2s.
     def segregate(self, head):
         #code here
-        count0 =0
-        count1 = 0
-        count2 =0
+        if not head or not head.next:
+            return head
+        zeroD = Node(0)
+        oneD = Node(0)
+        twoD = Node(0)
+        zero = zeroD
+        one = oneD
+        two = twoD
+        
         curr = head
         while curr:
             if curr.data == 0:
-                count0+=1
+                zero.next = curr
+                zero = zero.next
             elif curr.data == 1:
-                count1 +=1
+                one.next = curr
+                one = one.next
             else:
-                count2 +=1
+                two.next = curr
+                two = two.next
             curr = curr.next
-        curr = head
-        while curr:
-            if count0>0:
-                curr.data =0
-                count0-=1
-            elif count1>0:
-                curr.data=1
-                count1-=1
-            else:
-                curr.data=2
-                count2-=1
-            curr = curr.next
-        return head
-        # curr = head
-        # print(curr.data+"->")
-        # curr =curr.next
-        # while curr:
-        #     print(curr.data)
-        #     curr = curr.next
+        zero.next = oneD.next if oneD.next else twoD.next
+        one.next = twoD.next
+        two.next = None
         
-
+        head = zeroD.next
+        return head
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
 #{ 
  # Driver Code Starts
